@@ -1,0 +1,21 @@
+version: "3"
+services:
+  web:
+    image: yock/mikeyockey-web:latest
+    environment:
+      - PORT=443
+    ports:
+      - "443:443"
+    depends_on:
+      - api
+  mongo:
+    image: mongo:3.4
+  api:
+    image: yock/mikeyockey-api:latest
+    environment:
+      - PORT=80
+      - MONGO_HOST=mongo
+    depends_on:
+      - mongo
+volumes:
+  dist:
